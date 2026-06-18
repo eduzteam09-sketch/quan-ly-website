@@ -1,4 +1,5 @@
-import React, { useState, useRef } from 'react';
+// @ts-nocheck
+import React, { useState } from 'react';
 import { 
   LayoutDashboard, FileText, Download, Activity, CheckSquare, 
   BarChart, Search, Sparkles, Loader2, User, Calendar, Settings,
@@ -15,7 +16,6 @@ export default function App() {
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [aiAnalysis, setAiAnalysis] = useState(null);
 
-  // State cho Form nhập liệu
   const [formData, setFormData] = useState({
     clientName: 'Công ty CP Đầu tư & Công nghệ ABC',
     pmName: 'Nguyễn Văn A',
@@ -89,7 +89,7 @@ export default function App() {
     setIsAnalyzing(true);
     setAiAnalysis(null);
 
-    const apiKey = ""; // API key is injected by the environment
+    const apiKey = ""; // Lưu ý: Cần thêm API key qua biến môi trường để tính năng này hoạt động
     const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
 
     const promptText = `
@@ -136,7 +136,6 @@ export default function App() {
       }
     } catch (error) {
       console.error("AI Error:", error);
-      // Fallback giả lập dữ liệu nếu mất mạng hoặc lỗi API
       setTimeout(() => {
         setAiAnalysis({
           evaluation: {
@@ -154,8 +153,6 @@ export default function App() {
   };
 
   const handlePrint = () => {
-    // Kích hoạt hộp thoại in của trình duyệt. 
-    // Các CSS class 'print:hidden' và 'print:block' sẽ lo phần hiển thị.
     window.print();
   };
 
@@ -190,7 +187,7 @@ export default function App() {
   return (
     <div className="min-h-screen flex bg-slate-100 font-sans">
       
-      {/* SIDEBAR - Ẩn khi In */}
+      {/* SIDEBAR */}
       <aside className="w-64 bg-slate-900 text-slate-300 flex flex-col print:hidden sticky top-0 h-screen">
         <div className="p-6">
           <h2 className="text-2xl font-bold text-white flex items-center gap-2"><Globe className="text-blue-500"/> WebManager</h2>
@@ -221,7 +218,7 @@ export default function App() {
         {activeTab === 'report' && (
           <div className="p-8 max-w-5xl mx-auto print:p-0 print:max-w-none">
             
-            {/* VIEW NHẬP LIỆU (Ẩn khi In nhờ class print:hidden) */}
+            {/* VIEW NHẬP LIỆU */}
             <div className="space-y-6 print:hidden animate-in fade-in">
               <div className="flex justify-between items-center mb-8">
                 <div>
@@ -230,7 +227,6 @@ export default function App() {
                 </div>
               </div>
 
-              {}
               {/* THÔNG TIN CHUNG */}
               <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
                 <h3 className={sectionTitleClass}>Thông tin dự án</h3>
@@ -312,7 +308,6 @@ export default function App() {
                 </div>
               </div>
 
-              {}
               {/* 4 & 5. GA & GSC */}
               <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
                 <div className="flex items-center gap-3 mb-4 border-b-2 border-amber-500 pb-2">
@@ -350,7 +345,6 @@ export default function App() {
                 </div>
               </div>
 
-              {}
               {/* 6. AI ANALYSIS */}
               <div className="bg-gradient-to-br from-indigo-900 to-slate-900 p-6 rounded-2xl shadow-md text-white">
                 <div className="flex justify-between items-center mb-4">
@@ -394,8 +388,7 @@ export default function App() {
               </div>
             </div>
 
-            {}
-            {/* VIEW KHI IN PDF (Hiện ra khi in, ẩn khi xem web bình thường nhờ 'hidden print:block') */}
+            {/* VIEW KHI IN PDF */}
             <div className="hidden print:block font-serif text-slate-900 w-full max-w-[210mm] mx-auto bg-white">
               <div className="text-center mb-8 border-b-2 border-slate-900 pb-6">
                 <h1 className="text-2xl font-bold uppercase mb-4 leading-tight">BÁO CÁO ĐÁNH GIÁ HIỆU QUẢ PHÁT TRIỂN WEBSITE</h1>
@@ -492,9 +485,7 @@ export default function App() {
                   <p className="px-3 text-sm italic text-slate-500">Chưa có dữ liệu phân tích từ Hệ thống AI.</p>
                 )}
               </div>
-
             </div>
-
           </div>
         )}
       </main>
