@@ -89,7 +89,7 @@ export default function App() {
     setIsAnalyzing(true);
     setAiAnalysis(null);
 
-    const apiKey = ""; // Lưu ý: Cần thêm API key qua biến môi trường để tính năng này hoạt động
+    const apiKey = process.env.REACT_APP_GEMINI_API_KEY; // Lưu ý: Cần thêm API key qua biến môi trường để tính năng này hoạt động
     const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
 
     const promptText = `
